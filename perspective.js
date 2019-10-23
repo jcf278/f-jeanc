@@ -160,5 +160,20 @@ proto.set_clipping_path = function(ctx, points) {
 	ctx.closePath();
 	ctx.clip();
 };
+	public function listarArquivosRemessa()
+{    
+    $arrayRemessa = array_map('pathinfo', \File::files('assets/remessa'));
+    $arrayView = array_pluck($arrayRemessa, 'dirname');
+    // (^) Isso vai extrair apenas as keys que você precisa
+
+    return view ("PesquisaView")->with("arrayRemessa", $arrayView);
+}
+//E na view pode ficar assim:
+
+@foreach($arrayRemessa as $item)
+    <option>{{ $item }}</option>
+@endfor
 
 })();
+
+
