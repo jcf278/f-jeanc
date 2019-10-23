@@ -1,0 +1,12 @@
+<?php
+    //inclui o script https://github.com/tj/php-selector
+    include 'selector.inc';
+
+    $handle = fopen("https://www.oderco.com.br/", "rb");
+    $contents = stream_get_contents($handle);
+    fclose($handle);
+
+    //seleciona o conteudo da tag (igual seletor css)
+    $tag = select_elements('div p + ul', $contents);
+
+    var_dump(md5(serialize($tag)));
